@@ -1,0 +1,48 @@
+# ==========================================
+# DATASET GRANDE - NO SUBIR A GITHUB
+# ==========================================
+data/PapilaDB-PAPILA/
+
+# Mantener estructura de carpetas
+!data/.gitkeep
+
+# ==========================================
+# PYTHON
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+
+# ==========================================
+# JUPYTER NOTEBOOK
+# ==========================================
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# ==========================================
+# SISTEMA OPERATIVO
+# ==========================================
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# ==========================================
+# IDEs
+# ==========================================
+.vscode/
+.idea/
+*.sublime-*
+
+# ==========================================
+# CONFIGURACIONES LOCALES
+# ==========================================
+.env
+config_local.py
