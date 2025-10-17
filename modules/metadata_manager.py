@@ -47,7 +47,7 @@ class MetadataManager:
         try:
             # ✅ VERIFICAR que patient_id sea numérico
             if not patient_id.isdigit():
-                print(f"❌ Error: ID de paciente '{patient_id}' no es numérico")
+                print(f"Error: ID de paciente '{patient_id}' no es numérico")
                 return None
                 
             patient_id_int = int(patient_id)
@@ -66,7 +66,7 @@ class MetadataManager:
             if not patient_data.empty:
                 return patient_data.iloc[0].to_dict()
             else:
-                print(f"ℹ️ No se encontraron datos clínicos para paciente {patient_id} ({eye})")
+                print(f"No se encontraron datos clínicos para paciente {patient_id} ({eye})")
                 return None
                 
         except Exception as e:
@@ -85,7 +85,7 @@ class MetadataManager:
         Returns:
             bool: True si se actualizó correctamente
         """
-        # Esta es una implementación básica - en un sistema real
+        # Esta es una implementación basica - en un sistema real
         # se guardaría en una base de datos
         print(f"Datos actualizados para paciente {patient_id} ({eye}): {updates}")
         return True

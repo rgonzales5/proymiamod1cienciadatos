@@ -29,7 +29,7 @@ class ImageManager:
         # Encontrar todas las imágenes
         image_files = FileUtils.find_images(fundus_path)
         
-        print(f"🔍 Encontradas {len(image_files)} imágenes en FundusImages")
+        print(f"Encontradas {len(image_files)} imágenes en FundusImages")
         
         for image_file in image_files:
             patient_id, eye, _ = FileUtils.extract_patient_info(image_file.name)
@@ -75,7 +75,6 @@ class ImageManager:
         """
         patients_list = []
         for patient_key, patient in self.patients.items():
-            # ✅ SOLUCIÓN DIRECTA - Manejo robusto de has_contour_image
             try:
                 has_contour_image = bool(patient.contour_image_paths and len(patient.contour_image_paths) > 0)
             except:

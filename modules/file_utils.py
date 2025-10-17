@@ -20,9 +20,6 @@ class FileUtils:
         try:
             base_name = Path(filename).stem
             
-            # DEBUG TEMPORAL
-            # print(f"🔍 Procesando: {base_name}")
-            
             # Caso 1: Imágenes de fondo (RET002OD.jpg)
             if base_name.startswith('RET') and len(base_name) == 8:  # RET002OD = 8 caracteres
                 # RET002OD -> patient_id = "002", eye = "OD"
@@ -55,7 +52,7 @@ class FileUtils:
             return None, None, None
             
         except Exception as e:
-            print(f"❌ Error extrayendo info de {filename}: {e}")
+            print(f"Error extrayendo info de {filename}: {e}")
             return None, None, None
     
     @staticmethod
