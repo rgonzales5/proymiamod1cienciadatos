@@ -61,9 +61,54 @@ class MetadataManager:
 
 
 
-
-
     def get_patient_clinical_data(self, patient_id: str, eye: str) -> Optional[Dict]:
+        """
+        Obtener datos clínicos de un paciente
+        
+        Args:
+            patient_id (str): ID del paciente
+            eye (str): OD o OS
+            
+        Returns:
+            Optional[Dict]: Datos clínicos del paciente
+        """
+        try:
+            # Formatear ID para coincidir con el Excel (ej: "005" -> "#005")
+            excel_id = f"#{patient_id.zfill(3)}"
+            
+            clinical_data = self.clinical_data_od if eye == 'OD' else self.clinical_data_os
+            if clinical_data is None:
+                print(f"No hay datos clínicos cargados para {eye}")
+                return None
+            
+            # DEBUG: Verificar columnas disponibles
+            print(f"Columnas disponibles: {list(clinical_data.columns)}")
+            print(f"Buscando ID: {excel_id}")
+            
+            # Buscar por la columna 'ID' (no 'PatientID')
+            if 'ID' not in clinical_data.columns:
+                print(f"Error: No se encuentra columna 'ID' en datos {eye}")
+                return None
+                
+            patient_data = clinical_data[clinical_data['ID'] == excel_id]
+            
+            if not patient_data.empty:
+                print(f"✅ Datos encontrados para {excel_id}")
+                return patient_data.iloc[0].to_dict()
+            else:
+                # Intentar búsqueda alternativa
+                all_ids = clinical_data['ID'].dropna().unique()
+                print(f"IDs disponibles en {eye}: {all_ids[:10]}...")  # Mostrar primeros 10
+                print(f"No se encontraron datos clínicos para paciente {excel_id} ({eye})")
+                return None
+                
+        except Exception as e:
+            print(f"Error obteniendo datos clínicos para {patient_id}{eye}: {e}")
+            import traceback
+            traceback.print_exc()
+            return None
+
+    def get_patient_clinical_data_old2(self, patient_id: str, eye: str) -> Optional[Dict]:
         """
         Obtener datos clínicos de un paciente
         """
