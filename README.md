@@ -58,4 +58,4 @@ jupyter notebook main.ipynb
 - Ing. Rolando Gonzales Cespedes
 - Ing. Dennis Delgado
 - Ing. Robert Wilson Cruz Claure.
-- poner nombre
+- Ing. Harold J. Maldonado Bracamonte.
