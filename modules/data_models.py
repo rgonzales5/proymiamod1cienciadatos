@@ -5,7 +5,7 @@ from pathlib import Path
 @dataclass
 class Patient:
     """Clase para representar un paciente"""
-    patient_id: str
+    patient_id: str # tuve que aumentar esto por que me daba un error de tipo constante
     eye: str  # OD (ojo derecho) o OS (ojo izquierdo)
     image_path: Path
     contour_paths: List[Path]

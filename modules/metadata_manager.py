@@ -45,7 +45,7 @@ class MetadataManager:
             Optional[Dict]: Datos clínicos del paciente
         """
         try:
-            # ✅ VERIFICAR que patient_id sea numérico
+            # VERIFICAR que patient_id sea numérico
             if not patient_id.isdigit():
                 print(f"Error: ID de paciente '{patient_id}' no es numérico")
                 return None
