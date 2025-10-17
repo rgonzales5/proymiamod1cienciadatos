@@ -55,7 +55,7 @@ jupyter notebook main.ipynb
 ```
 
 ## Colaboradores
-- Ing. Rolando Gonzales C.
+- Ing. Rolando Gonzales Cespedes
 - Ing. Dennis Delgado
 - poner nombre
 - poner nombre
