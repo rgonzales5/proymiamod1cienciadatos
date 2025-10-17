@@ -57,5 +57,5 @@ jupyter notebook main.ipynb
 ## Colaboradores
 - Ing. Rolando Gonzales Cespedes
 - Ing. Dennis Delgado
-- poner nombre
+- Ing. Robert Wilson Cruz Claure.
 - poner nombre
