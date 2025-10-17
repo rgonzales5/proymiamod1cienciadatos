@@ -35,13 +35,33 @@ class ImageManager:
             patient_id, eye, _ = FileUtils.extract_patient_info(image_file.name)
             
             if patient_id and eye:
-                # Encontrar contornos relacionados
-                contour_pattern = f"RET{patient_id}{eye}_*.txt"
-                contour_files = list(contour_path.glob(contour_pattern))
+                # Buscar todos los archivos que contengan el ID y ojo
+                
+                # Encontrar contornos relacionados - método más robusto
+                contour_files = []
+                expected_prefix = f"RET{patient_id}{eye}"
+                for contour_file in contour_path.glob("*.txt"):
+                    if contour_file.name.startswith(expected_prefix):
+                        contour_files.append(contour_file)
+        
+        
+                '''
+                contour_files = []
+                for contour_file in contour_path.glob("*.txt"):
+                    if f"RET{patient_id}{eye}" in contour_file.name:
+                        contour_files.append(contour_file)
+                '''
+                
                 
                 # Encontrar imagen con contornos
                 contour_image_pattern = f"Opht_cont_RET{patient_id}{eye}.jpg"
                 contour_image_files = list(contour_images_path.glob(contour_image_pattern))
+                
+                '''
+                # Encontrar imagen con contornos
+                contour_image_pattern = f"Opht_cont_RET{patient_id}{eye}.jpg"
+                contour_image_files = list(contour_images_path.glob(contour_image_pattern))
+                '''
                 
                 patient_key = f"{patient_id}_{eye}"
                 self.patients[patient_key] = Patient(

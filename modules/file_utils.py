@@ -6,6 +6,11 @@ from typing import List, Dict, Any
 class FileUtils:
     """Utilidades para manejo de archivos del dataset PapilaDB"""
     
+    
+    
+
+    
+    
     @staticmethod
     def extract_patient_info(filename: str) -> tuple:
         """
@@ -20,6 +25,19 @@ class FileUtils:
         try:
             base_name = Path(filename).stem
             
+            # mejorado por que el anterior se chipaba con las longitudes de los ids
+            # Caso 1: Imágenes de fondo (RET002OD.jpg, RET010OD.jpg, etc.)
+            if base_name.startswith('RET'):
+                import re
+                # Patrón más flexible para IDs de 2-3 dígitos
+                ret_match = re.match(r'RET(\d{2,3})(OD|OS)$', base_name)
+                if ret_match:
+                    patient_id = ret_match.group(1).zfill(3)  # Rellena con ceros a la izquierda
+                    eye = ret_match.group(2)
+                    return patient_id, eye, 'image'
+            
+            
+            '''
             # Caso 1: Imágenes de fondo (RET002OD.jpg)
             if base_name.startswith('RET') and len(base_name) == 8:  # RET002OD = 8 caracteres
                 # RET002OD -> patient_id = "002", eye = "OD"
@@ -28,6 +46,7 @@ class FileUtils:
                 
                 if eye in ['OD', 'OS']:
                     return patient_id, eye, 'image'
+            '''
             
             # Caso 2: Archivos de contorno (RET002OD_cup_exp1.txt)
             elif base_name.startswith('RET') and '_' in base_name:
