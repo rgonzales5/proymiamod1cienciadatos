@@ -32,11 +32,19 @@ class MetadataManager:
             if od_file.exists():
                 # Leer saltando las primeras 2 filas de encabezados
                 self.clinical_data_od = pd.read_excel(od_file, header=2)
+                # Limpiar y estandarizar nombres de columnas
+                self.clinical_data_od.columns = ['ID', 'Age', 'Gender', 'Diagnosis', 'dioptre_1', 'dioptre_2', 
+                                               'astigmatism', 'Phakic/Pseudophakic', 'Pneumatic', 'Perkins', 
+                                               'Pachymetry', 'Axial_Length', 'VF_MD']
                 print(f"Datos OD cargados: {len(self.clinical_data_od)} pacientes")
+                
             if os_file.exists():
                 self.clinical_data_os = pd.read_excel(os_file, header=2)
+                self.clinical_data_os.columns = ['ID', 'Age', 'Gender', 'Diagnosis', 'dioptre_1', 'dioptre_2', 
+                                               'astigmatism', 'Phakic/Pseudophakic', 'Pneumatic', 'Perkins', 
+                                               'Pachymetry', 'Axial_Length', 'VF_MD']
                 print(f"Datos OS cargados: {len(self.clinical_data_os)} pacientes")
-                
+                    
         except Exception as e:
             print(f"Error cargando datos clínicos: {e}")
 
@@ -64,16 +72,9 @@ class MetadataManager:
     def get_patient_clinical_data(self, patient_id: str, eye: str) -> Optional[Dict]:
         """
         Obtener datos clínicos de un paciente
-        
-        Args:
-            patient_id (str): ID del paciente
-            eye (str): OD o OS
-            
-        Returns:
-            Optional[Dict]: Datos clínicos del paciente
         """
         try:
-            # Formatear ID para coincidir con el Excel (ej: "005" -> "#005")
+            # Formatear ID para coincidir con el Excel (ej: "002" -> "#002")
             excel_id = f"#{patient_id.zfill(3)}"
             
             clinical_data = self.clinical_data_od if eye == 'OD' else self.clinical_data_os
@@ -85,16 +86,17 @@ class MetadataManager:
             print(f"Columnas disponibles: {list(clinical_data.columns)}")
             print(f"Buscando ID: {excel_id}")
             
-            # Buscar por la columna 'ID' (no 'PatientID')
-            if 'ID' not in clinical_data.columns:
-                print(f"Error: No se encuentra columna 'ID' en datos {eye}")
-                return None
-                
-            patient_data = clinical_data[clinical_data['ID'] == excel_id]
+            # Búsqueda robusta - manejar espacios y formato
+            clinical_data['ID_clean'] = clinical_data['ID'].astype(str).str.strip().str.upper()
+            excel_id_clean = excel_id.strip().upper()
+            patient_data = clinical_data[clinical_data['ID_clean'] == excel_id_clean]
             
             if not patient_data.empty:
                 print(f"✅ Datos encontrados para {excel_id}")
-                return patient_data.iloc[0].to_dict()
+                # Convertir a dict y limpiar la columna temporal
+                result = patient_data.iloc[0].to_dict()
+                result.pop('ID_clean', None)  # Remover columna temporal
+                return result
             else:
                 # Intentar búsqueda alternativa
                 all_ids = clinical_data['ID'].dropna().unique()
@@ -107,6 +109,10 @@ class MetadataManager:
             import traceback
             traceback.print_exc()
             return None
+
+
+
+
 
     def get_patient_clinical_data_old2(self, patient_id: str, eye: str) -> Optional[Dict]:
         """
@@ -193,3 +199,7 @@ class MetadataManager:
         # se guardaría en una base de datos
         print(f"Datos actualizados para paciente {patient_id} ({eye}): {updates}")
         return True
+        
+        
+        
+        
