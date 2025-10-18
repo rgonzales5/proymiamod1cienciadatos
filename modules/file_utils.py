@@ -1,4 +1,15 @@
-# file utils
+#
+#  AUTOR:        Dennis Delgado A.
+#  FECHA:        12-10-2025
+#
+#  HISTORIAL DE MODIFICACIONES:
+#  -----------------------------------------------------------------------------
+#  FECHA       | AUTOR            | VERSIÓN | DESCRIPCIÓN DEL CAMBIO
+#  -----------------------------------------------------------------------------
+#  12-10-2025  | Dennis Delgado   | 1.0     | Versión inicial del archivo.
+#  15-10-2025  | Rolando Gonzales | 1.2     | se mejoro el formato de lectura de los ids de los pacientes ret_match = re.match(r'RET(\d{2,3})(OD|OS)_', base_name)
+#  -----------------------------------------------------------------------------
+# =============================================================================================
 
 import os
 import pandas as pd

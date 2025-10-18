@@ -1,3 +1,20 @@
+# =============================================================================================
+#  ARCHIVO:      data_models.py
+#  DESCRIPCIÓN:  Este archivo modela las clases usadas en el sistema. Principalmente Patient -> Paciente.
+#
+#  AUTOR:        Dennis Delgado A.
+#  FECHA:        12-10-2025
+#
+#  HISTORIAL DE MODIFICACIONES:
+#  -----------------------------------------------------------------------------
+#  FECHA       | AUTOR            | VERSIÓN | DESCRIPCIÓN DEL CAMBIO
+#  -----------------------------------------------------------------------------
+#  12-10-2025  | Dennis Delgado   | 1.0     | Versión inicial del archivo.
+#  13-10-2025  | Rolando Gonzales | 1.1     | Se mejoro la verificacion de error con 'raiseerror'.
+#  -----------------------------------------------------------------------------
+# =============================================================================================
+
+
 from dataclasses import dataclass
 from typing import List, Optional
 from pathlib import Path

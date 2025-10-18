@@ -1,3 +1,21 @@
+# =============================================================================================
+#  ARCHIVO:      image_manager.py
+#  DESCRIPCIÓN:  Este archivo mmaneja los pacientes y sus imagenes.
+#
+#  AUTOR:        Dennis Delgado A.
+#  FECHA:        12-10-2025
+#
+#  HISTORIAL DE MODIFICACIONES:
+#  -----------------------------------------------------------------------------
+#  FECHA       | AUTOR            | VERSIÓN | DESCRIPCIÓN DEL CAMBIO
+#  -----------------------------------------------------------------------------
+#  12-10-2025  | Dennis Delgado   | 1.0     | Versión inicial del archivo.
+#  14-10-2025  | Wilson Cruz      | 1.1     | Se mejoraron las rutas de acceso a  / "ExpertsSegmentations" / "Contours"
+#  15-10-2025  | Rolando Gonzales | 1.2     | Se arreglo la lectura del formato del id del paciente patient_key = f"{patient_id}_{eye}"
+#  -----------------------------------------------------------------------------
+# =============================================================================================
+
+
 from pathlib import Path
 import pandas as pd
 from PIL import Image

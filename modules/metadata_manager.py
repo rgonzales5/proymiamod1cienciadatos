@@ -1,3 +1,22 @@
+# =============================================================================================
+#  ARCHIVO:      metadata_manager.py
+#  DESCRIPCIÓN:  Este archivo mmaneja los pacientes y sus imagenes.
+#
+#  AUTOR:        Dennis Delgado A.
+#  FECHA:        12-10-2025
+#
+#  HISTORIAL DE MODIFICACIONES:
+#  -----------------------------------------------------------------------------
+#  FECHA       | AUTOR            | VERSIÓN | DESCRIPCIÓN DEL CAMBIO
+#  -----------------------------------------------------------------------------
+#  12-10-2025  | Dennis Delgado   | 1.0     | Versión inicial del archivo.
+#  14-10-2025  | Herland Maldonado | 1.1     | se puso manejo de escepciones al tratar con los archivos excelod_file = clinical_path / "patient_data_od.xlsx"
+#  15-10-2025  | Dennis Delgado | 1.2     | se arreglaron los formatos de las columnas de los datos. self.clinical_data_os.columns = ['ID',...
+#  15-10-2025  | Rolando Gonzales | 1.2     | se arreglaron el aceso al archivo excel y el formato de de lectura
+#  16-10-2025  | Wilson Cruz | 1.2     | se mejoro el sistema de excepciones del metodo "get_patient_clinical_data"
+#  -----------------------------------------------------------------------------
+# =============================================================================================
+
 import pandas as pd
 from pathlib import Path
 from typing import Dict, List, Optional
@@ -72,7 +91,7 @@ class MetadataManager:
             patient_data = clinical_data[clinical_data['ID_clean'] == excel_id_clean]
             
             if not patient_data.empty:
-                print(f"✅ Datos encontrados para {excel_id}")
+                print(f"Datos encontrados para {excel_id}")
                 # Convertir a dict y limpiar la columna temporal
                 result = patient_data.iloc[0].to_dict()
                 result.pop('ID_clean', None)  # Remover columna temporal
