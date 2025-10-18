@@ -1,3 +1,5 @@
+# file utils
+
 import os
 import pandas as pd
 from pathlib import Path
@@ -93,3 +95,4 @@ class FileUtils:
             images.extend(base_path.glob(f'**/*{ext}'))
         
         return images
+        

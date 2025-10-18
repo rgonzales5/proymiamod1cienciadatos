@@ -6,6 +6,8 @@ from typing import List, Dict, Optional
 from .data_models import Patient
 from .file_utils import FileUtils
 
+# para manejar las imagenes
+
 class ImageManager:
     """Gestor de imágenes médicas"""
     
