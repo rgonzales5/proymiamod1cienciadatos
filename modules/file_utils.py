@@ -8,10 +8,6 @@ from typing import List, Dict, Any
 class FileUtils:
     """Utilidades para manejo de archivos del dataset PapilaDB"""
     
-    
-    
-
-    
     @staticmethod
     def extract_patient_info(filename: str) -> tuple:
         """
